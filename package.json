@@ -1,0 +1,29 @@
+{
+	"name": "cantine",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/a2br/spc-cantine"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Anatole Debierre",
+	"license": "Unlicense",
+	"dependencies": {
+		"node-fetch": "^2.6.1",
+		"xml2js": "^0.4.23"
+	},
+	"devDependencies": {
+		"@types/node": "^14.14.22",
+		"@types/node-fetch": "^2.5.8",
+		"@types/xml2js": "^0.4.8",
+		"@typescript-eslint/eslint-plugin": "^4.14.2",
+		"@typescript-eslint/parser": "^4.14.2",
+		"eslint": "^7.19.0",
+		"prettier": "^2.2.1",
+		"typescript": "^4.1.3"
+	}
+}
