@@ -51,7 +51,7 @@ Simple programme ne comportant qu'une fonction qui va chercher le menu de la can
 				"Tomate féta",
 				"Kebab",
 				"Pommes vapeur",
-				"Poêlée de haricots",
+				"Poêlée de haricots verts",
 				"Kiri",
 				"Moelleux aux fruits"
 			]
@@ -60,7 +60,7 @@ Simple programme ne comportant qu'une fonction qui va chercher le menu de la can
 			"name": "VENDREDI",
 			"menuItems": [
 				"Oeuf mimosa",
-				"Dos de cabillaud au",
+				"Dos de cabillaud au beurre blanc",
 				"Riz",
 				"Poêlée de ratatouille",
 				"Vache qui rit",
