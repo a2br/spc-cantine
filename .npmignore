@@ -2,6 +2,7 @@ node_modules
 .eslintignore
 .eslintrc.json
 .gitignore
+.prettierignore
 .prettierrc.json
 index.ts
 tsconfig.json
