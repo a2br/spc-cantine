@@ -31,14 +31,6 @@ function processData(
 	).DIV[0].DIV[0].DIV[0];
 	const cross: any[] = junction.SECTION[0].DIV[1].DIV;
 
-	const joinableStarts: Array<{ str: string; join: string }> = [
-		{ str: "au ", join: " " },
-	];
-	const joinableEnds: Array<{ str: string; join: string }> = [
-		{ str: " au", join: " " },
-		{ str: " au ", join: "" },
-	];
-
 	const menu = cross
 		// Main transformation
 		.map((road: Record<string, any>): {
@@ -58,10 +50,16 @@ function processData(
 					d.$["DATA-TESTID"] === "matrix-gallery-items-container"
 			).DIV;
 			const menuItems = menuItemsRaw.map(
-				(item: Record<string, any>): string =>
-					item.DIV[0].DIV[0].DIV[0].DIV[0]["WIX-IMAGE"][0].IMG[0].$.ALT
+				(item: Record<string, any>): string => {
+					const itemObj = item.DIV[0].DIV[0].DIV[0].DIV[0];
+					// const alt = itemObj["WIX-IMAGE"][0].IMG[0].$.ALT;
+					const text = itemObj["DIV"][0].DIV[0].DIV[0]._;
+					const otherLines = itemObj["DIV"][0].DIV[0].P;
+					const line2 = otherLines ? otherLines[0]._ : "";
+					const final = line2 ? [text, line2].join(" ") : text;
+					return final;
+				}
 			);
-			//TODO: Consider getting 2nd line info for each elem
 			return {
 				name,
 				menuItems,
