@@ -57,31 +57,10 @@ function processData(
 				(d: Record<string, any>) =>
 					d.$["DATA-TESTID"] === "matrix-gallery-items-container"
 			).DIV;
-			const menuItems = menuItemsRaw
-				.map(
-					(item: Record<string, any>): string =>
-						item.DIV[0].DIV[0].DIV[0].DIV[0]["WIX-IMAGE"][0].IMG[0].$.ALT
-				)
-				// Join items if needed
-				.map((item, i, a) => {
-					const before = a[i - 1];
-					const after = a[i + 1];
-					const beforeEnd = joinableEnds.find(({ str }) =>
-						before?.endsWith(str)
-					);
-					const afterStart = joinableStarts.find(({ str }) =>
-						after?.startsWith(str)
-					);
-					if (before && beforeEnd) item = [before, item].join(beforeEnd.join);
-					if (after && afterStart) item = [item, after].join(afterStart.join);
-					return item;
-				})
-				// Remove leftovers
-				.filter(
-					(item) =>
-						!joinableEnds.some(({ str }) => item.endsWith(str)) &&
-						!joinableStarts.some(({ str }) => item.startsWith(str))
-				);
+			const menuItems = menuItemsRaw.map(
+				(item: Record<string, any>): string =>
+					item.DIV[0].DIV[0].DIV[0].DIV[0]["WIX-IMAGE"][0].IMG[0].$.ALT
+			);
 			return {
 				name,
 				menuItems,
