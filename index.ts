@@ -61,6 +61,7 @@ function processData(
 				(item: Record<string, any>): string =>
 					item.DIV[0].DIV[0].DIV[0].DIV[0]["WIX-IMAGE"][0].IMG[0].$.ALT
 			);
+			//TODO: Consider getting 2nd line info for each elem
 			return {
 				name,
 				menuItems,
