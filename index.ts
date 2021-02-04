@@ -29,30 +29,64 @@ function processData(
 	).DIV[0].MAIN[0].DIV[0].DIV[0].DIV[0].DIV.find(
 		(d: any) => d.$.CLASS === "_2S9ms"
 	).DIV[0].DIV[0].DIV[0];
-	const cross = junction.SECTION[0].DIV[1].DIV;
+	const cross: any[] = junction.SECTION[0].DIV[1].DIV;
 
-	const menu = cross.map((road: Record<string, any>) => {
-		const path = road.DIV.find(
-			(d: Record<string, any>) => d.$["DATA-TESTID"] === "inline-content"
-		).DIV[0];
-		const dayName = path.DIV.find(
-			(d: Record<string, any>) => d.$.ROLE === "button"
-		).DIV[0].SPAN[0]._;
-		const menuItemsRaw = path.DIV.find(
-			(d: Record<string, any>) => d.$["ARIA-LABEL"] === "Matrix gallery"
-		).DIV.find(
-			(d: Record<string, any>) =>
-				d.$["DATA-TESTID"] === "matrix-gallery-items-container"
-		).DIV;
-		const menuItems = menuItemsRaw.map(
-			(item: Record<string, any>) =>
-				item.DIV[0].DIV[0].DIV[0].DIV[0]["WIX-IMAGE"][0].IMG[0].$.ALT
-		);
-		return {
-			name: dayName,
-			menuItems,
-		};
-	});
+	const joinableStarts: Array<{ str: string; join: string }> = [
+		{ str: "au ", join: " " },
+	];
+	const joinableEnds: Array<{ str: string; join: string }> = [
+		{ str: " au", join: " " },
+		{ str: " au ", join: "" },
+	];
+
+	const menu = cross
+		// Main transformation
+		.map((road: Record<string, any>): {
+			name: string;
+			menuItems: string[];
+		} => {
+			const path = road.DIV.find(
+				(d: Record<string, any>) => d.$["DATA-TESTID"] === "inline-content"
+			).DIV[0];
+			const name = path.DIV.find(
+				(d: Record<string, any>) => d.$.ROLE === "button"
+			).DIV[0].SPAN[0]._;
+			const menuItemsRaw: any[] = path.DIV.find(
+				(d: Record<string, any>) => d.$["ARIA-LABEL"] === "Matrix gallery"
+			).DIV.find(
+				(d: Record<string, any>) =>
+					d.$["DATA-TESTID"] === "matrix-gallery-items-container"
+			).DIV;
+			const menuItems = menuItemsRaw
+				.map(
+					(item: Record<string, any>): string =>
+						item.DIV[0].DIV[0].DIV[0].DIV[0]["WIX-IMAGE"][0].IMG[0].$.ALT
+				)
+				// Join items if needed
+				.map((item, i, a) => {
+					const before = a[i - 1];
+					const after = a[i + 1];
+					const beforeEnd = joinableEnds.find(({ str }) =>
+						before?.endsWith(str)
+					);
+					const afterStart = joinableStarts.find(({ str }) =>
+						after?.startsWith(str)
+					);
+					if (before && beforeEnd) item = [before, item].join(beforeEnd.join);
+					if (after && afterStart) item = [item, after].join(afterStart.join);
+					return item;
+				})
+				// Remove leftovers
+				.filter(
+					(item) =>
+						!joinableEnds.some(({ str }) => item.endsWith(str)) &&
+						!joinableStarts.some(({ str }) => item.startsWith(str))
+				);
+			return {
+				name,
+				menuItems,
+			};
+		});
 
 	const [from, to] = junction.DIV.find((d: any) => d.$.ID === "comp-jpntrto6")
 		.H2[0].SPAN[0].SPAN[0]._.substr("Menu du ".length)
