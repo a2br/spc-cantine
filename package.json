@@ -1,6 +1,6 @@
 {
 	"name": "spc-cantine",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Un module pour récupérer le menu de la cantine à SPC",
 	"main": "index.js",
 	"repository": {
