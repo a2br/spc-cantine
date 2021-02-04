@@ -1,4 +1,5 @@
 node_modules
+.eslintignore
 .eslintrc.json
 .gitignore
 .prettierrc.json
