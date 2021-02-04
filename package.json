@@ -7,6 +7,11 @@
 		"type": "git",
 		"url": "https://github.com/a2br/spc-cantine"
 	},
+	"keywords": [
+		"spc",
+		"cantine",
+		"xml-parsing"
+	],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
