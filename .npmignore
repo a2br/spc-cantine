@@ -2,6 +2,7 @@ node_modules
 .eslintignore
 .eslintrc.json
 .gitignore
+.gitpod.yml
 .prettierignore
 .prettierrc.json
 index.ts
