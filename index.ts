@@ -94,3 +94,5 @@ export async function getMenu(): Promise<{
 	const processed = processData(parsed);
 	return processed;
 }
+
+export default getMenu;
