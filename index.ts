@@ -81,14 +81,45 @@ function processData(
 	};
 }
 
-export async function getMenu(): Promise<{
-	week: { from: string; to: string };
+export interface formattedMenu {
+	week: {
+		/**
+		 * @example "01/02/2021"
+		 */
+		from: string;
+		/**
+		 * @example "05/02/2021"
+		 */
+		to: string;
+	};
+	/**
+	 * @example "/"
+	 */
 	supplements: string;
-	days: {
+	/**
+	 * @description Devrait contenir 5 éléments, pour chaque colonne du tableau et chaque jour
+	 */
+	days: Array<{
+		/**
+		 * @example "MARDI"
+		 */
 		name: string;
-		menuItems: string[];
-	}[];
-}> {
+		/**
+		 * @example
+		 * [
+		 * 	"Tomate féta",
+		 * 	"Kebab",
+		 * 	"Pommes vapeur",
+		 * 	"Duo de carottes",
+		 * 	"Vache qui rit",
+		 * 	"Moelleux aux fruits"
+		 * ]
+		 */
+		menuItems: Array<string>;
+	}>;
+}
+
+export async function getMenu(): Promise<formattedMenu> {
 	const fetched = await fetchMenu();
 	const parsed = await toJson(fetched);
 	const processed = processData(parsed);
