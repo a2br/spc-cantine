@@ -42,7 +42,7 @@ function processData(
 			).DIV[0];
 			const name = path.DIV.find(
 				(d: Record<string, any>) => d.$.ROLE === "button"
-			).DIV[0].SPAN[0]._;
+			).DIV[0].SPAN[0]._.trim();
 			const menuItemsRaw: any[] = path.DIV.find(
 				(d: Record<string, any>) => d.$["ARIA-LABEL"] === "Matrix gallery"
 			).DIV.find(
@@ -53,10 +53,10 @@ function processData(
 				(item: Record<string, any>): string => {
 					const itemObj = item.DIV[0].DIV[0].DIV[0].DIV[0];
 					// const alt = itemObj["WIX-IMAGE"][0].IMG[0].$.ALT;
-					const text = itemObj["DIV"][0].DIV[0].DIV[0]._;
+					const text: string = itemObj["DIV"][0].DIV[0].DIV[0]._;
 					const otherLines = itemObj["DIV"][0].DIV[0].P;
-					const line2 = otherLines ? otherLines[0]._ : "";
-					const final = line2 ? [text, line2].join(" ") : text;
+					const line2: string = otherLines ? otherLines[0]._ : "";
+					const final = (line2 ? [text, line2].join(" ") : text).trim();
 					return final;
 				}
 			);
@@ -66,13 +66,19 @@ function processData(
 			};
 		});
 
-	const [from, to] = junction.DIV.find((d: any) => d.$.ID === "comp-jpntrto6")
+	const [from, to]: [string, string] = junction.DIV.find(
+		(d: any) => d.$.ID === "comp-jpntrto6"
+	)
 		.H2[0].SPAN[0].SPAN[0]._.substr("Menu du ".length)
-		.split(" au ");
-	const supplements = junction.DIV.find((d: any) => d.$.ID === "comp-jzwnw9u8")
+		.split(" au ")
+		.map((e: string) => e.trim());
+	const supplements: string = junction.DIV.find(
+		(d: any) => d.$.ID === "comp-jzwnw9u8"
+	)
 		.P[0].SPAN[0].SPAN[0]._.replace(/(\t|\r)/g, "")
 		.replace(/(\n)/g, " ")
-		.substr("Suppléments au lycée : ".length);
+		.substr("Suppléments au lycée : ".length)
+		.trim();
 
 	return {
 		week: { from, to },
