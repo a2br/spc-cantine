@@ -1,9 +1,13 @@
+coverage
 node_modules
 .eslintignore
 .eslintrc.json
+.gitattributes
 .gitignore
 .gitpod.yml
 .prettierignore
 .prettierrc.json
 index.ts
+*.test.[tj]s
+jest.config.js
 tsconfig.json
