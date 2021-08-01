@@ -8,7 +8,6 @@ on:
   # Every 6 hours (0, 6, 12, 18)
   schedule:
     - cron: 0 */6 * * *
-    branches: [main]
 
 
 jobs:
