@@ -30,7 +30,7 @@ function processData(
 	const site = body.DIV[0] /* id="SITE_CONTAINER" */.DIV[0]; /* id="MAIN_MF" */
 	const junction = site.DIV.find((d: any) => d.$.ID === "site-root").DIV[0].MAIN[0].DIV[0].DIV[0].DIV[0].DIV[1].DIV[0]
 		.DIV[0].DIV[0];
-	const cross: any[] = junction.SECTION[0].DIV[1].DIV;
+	const cross: any[] = junction.SECTION[0].DIV[1].DIV; // Columns
 
 	const menu = cross
 		// Main transformation
@@ -58,12 +58,10 @@ function processData(
 			};
 		});
 
-	const [from, to]: [string, string] = junction.DIV.find((d: any) => d.$.ID === "comp-jpntrto6")
-		.H2[0].SPAN[0].SPAN[0]._.substr("Menu du ".length)
+	const [from, to]: [string, string] = junction.DIV[2].H2[0].SPAN[0].SPAN[0].SPAN[0]._.substr("Menu du ".length)
 		.split(" au ")
 		.map((e: string) => e.trim());
-	const supplements: string = junction.DIV.find((d: any) => d.$.ID === "comp-jzwnw9u8")
-		.P[0].SPAN[0].SPAN[0]._.replace(/(\t|\r)/g, "")
+	const supplements: string = junction.DIV[4].P[0].SPAN[0].SPAN[0]._.replace(/(\t|\r)/g, "")
 		.replace(/(\n)/g, " ")
 		.substr("Suppléments au lycée : ".length)
 		.trim();
