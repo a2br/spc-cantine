@@ -61,7 +61,8 @@ function processData(
 	const [from, to]: [string, string] = junction.DIV[2].H2[0].SPAN[0].SPAN[0].SPAN[0]._.substr("Menu du ".length)
 		.split(" au ")
 		.map((e: string) => e.trim());
-	const supplements: string = junction.DIV[4].P[0].SPAN[0].SPAN[0]._.replace(/(\t|\r)/g, "")
+
+	const supplements: string = junction.DIV[4].P[0].SPAN[0].SPAN[0].SPAN[0]._.replace(/(\t|\r)/g, "")
 		.replace(/(\n)/g, " ")
 		.substr("Suppléments au lycée : ".length)
 		.trim();
