@@ -1,6 +1,8 @@
 import fetch from "node-fetch";
 import xml from "xml2js";
 
+const URL = "https://www.saintpierrechanel.fr/restauration";
+
 export class ParseError extends Error {
 	constructor(public typeError: TypeError) {
 		super("A parsing error of the menu occured. This most likely means the library is outdated requires an update.");
@@ -8,7 +10,7 @@ export class ParseError extends Error {
 }
 
 async function fetchMenu(): Promise<string> {
-	const res = await fetch("https://www.saintpierrechanel.fr/copie-de-restauration");
+	const res = await fetch(URL);
 	const data = await res.text();
 	return data;
 }
