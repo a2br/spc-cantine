@@ -5,7 +5,9 @@ const URL = "https://www.saintpierrechanel.fr/restauration";
 
 export class ParseError extends Error {
 	constructor(public typeError: TypeError) {
-		super("A parsing error of the menu occured. This most likely means the library is outdated requires an update.");
+		super(
+			"A parsing error of the menu occured. This most likely means the library is outdated and requires an update."
+		);
 	}
 }
 
